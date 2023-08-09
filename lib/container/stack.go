@@ -1,4 +1,4 @@
-package structure
+package container
 
 type Stack[T any] struct {
     items []*T
@@ -10,7 +10,7 @@ func (q *Stack[T]) Push(item *T) {
 
 func (q *Stack[T]) Pop() (*T, error) {
     if q.Empty() {
-        return nil, ErrEmpty
+        return nil, ErrEmptyContainer
     }
 
     lastIndex := q.Size() - 1
@@ -20,9 +20,9 @@ func (q *Stack[T]) Pop() (*T, error) {
     return item, nil
 }
 
-func (q *Stack[T]) Top() (*T, error) {
+func (q *Stack[T]) Peek() (*T, error) {
     if q.Empty() {
-        return nil, ErrEmpty
+        return nil, ErrEmptyContainer
     }
 
     lastIndex := q.Size() - 1
@@ -36,4 +36,8 @@ func (q *Stack[T]) Size() int {
 
 func (q *Stack[T]) Empty() bool {
     return q.Size() == 0
+}
+
+func (q *Stack[T]) Clear() {
+    q.items = nil
 }
